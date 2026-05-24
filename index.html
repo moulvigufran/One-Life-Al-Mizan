@@ -1,0 +1,432 @@
+import React, { useState, useEffect } from 'react';
+import { Heart, Activity, ShieldCheck, ExternalLink, FileText, UserCheck, CheckCircle2, ChevronRight, Scale, Quote, Plus, Minus } from 'lucide-react';
+
+const activeCampaigns = [
+  {
+    id: "CASE-01A",
+    title: "Patient 45M - Emergency Orthopedic Implant",
+    ward: "Surgery Ward",
+    goal: 45000,
+    raised: 32000,
+    urgency: "High",
+    description: "Patient requires an immediate titanium implant for a compound fracture. Family unable to meet the remaining hospital cost estimate.",
+    link: "#" 
+  },
+  {
+    id: "CASE-02B",
+    title: "Student Tuition Relief - Final Year MBBS",
+    ward: "Academic Block",
+    goal: 25000,
+    raised: 5000,
+    urgency: "Medium",
+    description: "Meritorious student requires immediate assistance for final year tuition fees to prevent academic drop-off. Funds route directly to college portal.",
+    link: "#"
+  }
+];
+
+const ledgerEntries = [
+  {
+    id: "TRX-092",
+    date: "May 18, 2026",
+    recipient: "Hospital Billing (Patient 32F)",
+    amount: "₹18,500",
+    purpose: "Post-op Antibiotics & Care",
+    status: "Verified & Paid"
+  },
+  {
+    id: "TRX-091",
+    date: "May 10, 2026",
+    recipient: "Local Medical Bookstore",
+    amount: "₹12,000",
+    purpose: "3rd Year Books for Student",
+    status: "Verified & Paid"
+  }
+];
+
+export default function App() {
+  const [isEnglish, setIsEnglish] = useState(true);
+  const [expandedPhilosophy, setExpandedPhilosophy] = useState('one-life');
+  const [splashState, setSplashState] = useState('entering');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsEnglish((prev) => !prev);
+    }, 4000); // Slower, more deliberate rotation
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const fadeOutTimer = setTimeout(() => setSplashState('leaving'), 2200);
+    const unmountTimer = setTimeout(() => setSplashState('done'), 3000);
+    return () => {
+      clearTimeout(fadeOutTimer);
+      clearTimeout(unmountTimer);
+    };
+  }, []);
+
+  const togglePhilosophy = (section) => {
+    if (expandedPhilosophy === section) {
+      setExpandedPhilosophy(null);
+    } else {
+      setExpandedPhilosophy(section);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#FDFBF7] font-sans text-[#1A1A1A] selection:bg-[#065F46] selection:text-white">
+      
+      {}
+      {splashState !== 'done' && (
+        <div className={`fixed inset-0 z-[100] bg-[#FDFBF7] flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out ${splashState === 'leaving' ? 'opacity-0' : 'opacity-100'}`}>
+          <div className="overflow-hidden flex items-center gap-3">
+            <div className="animate-slide-up-fade bg-[#1A1A1A] p-2 rounded-none border-2 border-[#1A1A1A]">
+              <Activity className="h-8 w-8 text-[#FDFBF7]" />
+            </div>
+            <h1 className="animate-slide-up-fade text-4xl sm:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A]">
+              One Life
+            </h1>
+          </div>
+          <div className="overflow-hidden mt-4">
+            <h2 className="animate-slide-up-fade-delay text-4xl sm:text-5xl font-medium text-[#065F46]" style={{ fontFamily: "'Jameel Noori Nastaleeq', 'Nafees Nastaleeq', serif" }} dir="rtl">
+              المیزان
+            </h2>
+          </div>
+        </div>
+      )}
+
+      {}
+      <nav className="bg-[#FDFBF7] border-b-2 border-[#1A1A1A] sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-20 items-center">
+            
+            {/* Auto-Rotating Brand Logo */}
+            <div className="flex items-center gap-3 select-none group">
+              <div className="bg-[#1A1A1A] p-2 rounded-none border-2 border-[#1A1A1A] transition-all duration-300">
+                <Activity className="h-6 w-6 text-[#FDFBF7]" />
+              </div>
+              <div className="flex items-center text-2xl font-black tracking-tighter text-[#1A1A1A] uppercase">
+                <span className="mr-2">One Life:</span>
+                <div className="relative h-10 w-36 flex items-center overflow-hidden">
+                  <span 
+                    className={`absolute inset-0 flex items-center text-[#065F46] transition-all duration-700 ease-[cubic-bezier(0.87,0,0.13,1)]
+                      ${isEnglish ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
+                  >
+                    AL-MIZAN
+                  </span>
+                  <span 
+                    className={`absolute inset-0 flex items-center text-3xl font-medium text-[#065F46] transition-all duration-700 ease-[cubic-bezier(0.87,0,0.13,1)]
+                      ${!isEnglish ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'}`}
+                    style={{ fontFamily: "'Jameel Noori Nastaleeq', 'Nafees Nastaleeq', serif" }}
+                    dir="rtl"
+                  >
+                    المیزان
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="hidden md:flex gap-8 text-sm font-bold text-[#1A1A1A] uppercase tracking-widest">
+              <a href="#campaigns" className="hover:text-[#065F46] transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-[#065F46] hover:after:w-full after:transition-all">Active Cases</a>
+              <a href="#ledger" className="hover:text-[#065F46] transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-[#065F46] hover:after:w-full after:transition-all">Transparency</a>
+              <a href="#initiative" className="hover:text-[#065F46] transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-[#065F46] hover:after:w-full after:transition-all">The Initiative</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {}
+      <div className="relative pt-24 pb-20 lg:pt-32 lg:pb-24 border-b-2 border-[#1A1A1A] bg-[url('https://www.transparenttextures.com/patterns/clean-paper.png')]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            
+            <div className="lg:col-span-8 animate-fade-in-up">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#1A1A1A] text-[#FDFBF7] text-xs font-bold uppercase tracking-widest mb-8">
+                <ShieldCheck className="h-3 w-3" /> 100% Direct-to-Hospital Routing
+              </div>
+              
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-[#1A1A1A] mb-8 leading-[0.95] uppercase">
+                Balancing <br/> the scales of <br/> <span className="text-[#065F46]">critical care.</span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-[#1A1A1A] mb-12 max-w-2xl leading-relaxed font-serif">
+                An independent, student-led collective identifying critical patients in need. We route transparent, verified funds directly to hospital billing departments—zero middlemen, zero hidden fees.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <a href="#campaigns" className="group w-full sm:w-auto bg-[#065F46] text-[#FDFBF7] px-8 py-4 font-bold uppercase tracking-widest text-sm border-2 border-[#065F46] hover:bg-[#FDFBF7] hover:text-[#065F46] transition-colors flex items-center justify-center gap-2">
+                  Fund a Case <ChevronRight className="h-4 w-4" />
+                </a>
+                <a href="#ledger" className="w-full sm:w-auto bg-transparent text-[#1A1A1A] px-8 py-4 font-bold uppercase tracking-widest text-sm border-2 border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-[#FDFBF7] transition-colors flex items-center justify-center">
+                  View the Ledger
+                </a>
+              </div>
+            </div>
+
+            {/* Stark Stats Panel */}
+            <div className="lg:col-span-4 flex flex-col gap-4">
+              <div className="border-2 border-[#1A1A1A] p-6 bg-white">
+                <p className="text-xs uppercase tracking-widest font-bold text-[#1A1A1A]/60 mb-1 border-b-2 border-[#1A1A1A] pb-2">Verified Cases</p>
+                <p className="text-5xl font-black text-[#1A1A1A] pt-2">12</p>
+              </div>
+              <div className="border-2 border-[#1A1A1A] p-6 bg-[#065F46] text-[#FDFBF7]">
+                <p className="text-xs uppercase tracking-widest font-bold text-[#FDFBF7]/60 mb-1 border-b-2 border-[#FDFBF7]/30 pb-2">Total Routed</p>
+                <p className="text-5xl font-black pt-2">₹1.4L+</p>
+              </div>
+              <div className="border-2 border-[#1A1A1A] p-6 bg-white">
+                <p className="text-xs uppercase tracking-widest font-bold text-[#1A1A1A]/60 mb-1 border-b-2 border-[#1A1A1A] pb-2">Overhead Taken</p>
+                <p className="text-5xl font-black text-[#1A1A1A] pt-2">0%</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {}
+      <div className="py-12 border-b-2 border-[#1A1A1A] bg-[#FDFBF7]">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 border-b-4 border-[#1A1A1A] pb-2">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#065F46] mb-1">Nomenclature</p>
+            <h2 className="text-2xl font-black text-[#1A1A1A] uppercase tracking-tighter">The Philosophy</h2>
+          </div>
+
+          <div className="border-2 border-[#1A1A1A] divide-y-2 divide-[#1A1A1A] bg-white">
+            
+            {/* One Life Dropdown */}
+            <div>
+              <button 
+                onClick={() => togglePhilosophy('one-life')}
+                className="w-full flex items-center justify-between p-4 hover:bg-[#FDFBF7] transition-colors text-left"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-black text-[#065F46]">01</span>
+                  <h3 className="text-lg font-black uppercase tracking-tight">"One Life"</h3>
+                </div>
+                {expandedPhilosophy === 'one-life' ? <Minus className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+              </button>
+              
+              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${expandedPhilosophy === 'one-life' ? 'max-h-[300px] border-t-2 border-[#1A1A1A]' : 'max-h-0'}`}>
+                <div className="p-4 bg-[#FDFBF7]">
+                  <p className="font-serif italic text-base mb-2 text-[#1A1A1A] font-bold">
+                    "Whoever saves one life, it is as if he had saved mankind entirely."
+                  </p>
+                  <p className="font-serif text-sm leading-relaxed text-[#1A1A1A]/80 mt-2">
+                    We cannot fix the entire system overnight. But finding one critical patient abandoning care due to cost, and funding their treatment, changes their entire universe.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Al-Mizan Dropdown */}
+            <div>
+              <button 
+                onClick={() => togglePhilosophy('al-mizan')}
+                className="w-full flex items-center justify-between p-4 hover:bg-[#FDFBF7] transition-colors text-left"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-black text-[#065F46]">02</span>
+                  <div className="flex items-end gap-2">
+                    <h3 className="text-lg font-black uppercase tracking-tight">Al-Mizan</h3>
+                    <span 
+                      className="text-lg font-medium text-[#065F46] leading-none mb-0.5" 
+                      style={{ fontFamily: "'Jameel Noori Nastaleeq', 'Nafees Nastaleeq', serif" }} 
+                      dir="rtl"
+                    >
+                      المیزان
+                    </span>
+                  </div>
+                </div>
+                {expandedPhilosophy === 'al-mizan' ? <Minus className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+              </button>
+              
+              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${expandedPhilosophy === 'al-mizan' ? 'max-h-[300px] border-t-2 border-[#1A1A1A]' : 'max-h-0'}`}>
+                <div className="p-4 bg-[#FDFBF7]">
+                  <p className="font-bold uppercase tracking-widest text-xs text-[#1A1A1A] mb-2">
+                    Translation: The Scale / The Ledger
+                  </p>
+                  <p className="font-serif text-sm leading-relaxed text-[#1A1A1A]/80">
+                    Al-Mizan represents financial justice. Our platform acts as an open-source ledger—routing verified donations directly to hospital billing desks with 100% transparency.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {}
+      <div id="campaigns" className="py-24 border-b-2 border-[#1A1A1A] bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-[#FDFBF7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 pb-4 border-b-4 border-[#1A1A1A]">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#991B1B] mb-2 flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#991B1B] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#991B1B]"></span>
+                </span>
+                Live Cases
+              </p>
+              <h2 className="text-4xl font-black text-[#1A1A1A] uppercase tracking-tighter">Active Interventions</h2>
+            </div>
+            <p className="text-sm font-bold uppercase tracking-widest text-[#1A1A1A]/60 max-w-xs text-right mt-4 md:mt-0">
+              Physically verified in the wards.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {activeCampaigns.map((campaign) => {
+              const progressPercentage = Math.min(Math.round((campaign.raised / campaign.goal) * 100), 100);
+              return (
+                <div key={campaign.id} className="bg-white border-2 border-[#1A1A1A] p-8 flex flex-col h-full hover:-translate-y-1 hover:shadow-[8px_8px_0px_rgba(26,26,26,1)] transition-all">
+                  <div className="flex justify-between items-start mb-6 pb-6 border-b-2 border-[#1A1A1A]/10">
+                    <span className="bg-[#1A1A1A] text-[#FDFBF7] text-xs font-bold px-3 py-1 uppercase tracking-widest">
+                      {campaign.urgency} Priority
+                    </span>
+                    <span className="text-sm font-black text-[#1A1A1A] font-mono">
+                      {campaign.id}
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-2xl font-black text-[#1A1A1A] mb-3 leading-tight uppercase">{campaign.title}</h3>
+                  <p className="text-xs font-bold uppercase tracking-widest text-[#065F46] mb-6 flex items-center gap-2">
+                    <Activity className="h-4 w-4"/> {campaign.ward}
+                  </p>
+                  
+                  <p className="text-[#1A1A1A] mb-8 flex-grow leading-relaxed font-serif text-lg">{campaign.description}</p>
+                  
+                  {/* Neobrutalist Progress Bar */}
+                  <div className="mb-8 border-2 border-[#1A1A1A] p-4 bg-[#FDFBF7]">
+                    <div className="flex justify-between font-mono text-sm font-bold mb-2 uppercase">
+                      <span>Raised: ₹{campaign.raised.toLocaleString()}</span>
+                      <span>Goal: ₹{campaign.goal.toLocaleString()}</span>
+                    </div>
+                    <div className="w-full bg-white border-2 border-[#1A1A1A] h-4">
+                      <div 
+                        className="bg-[#065F46] h-full transition-all duration-1000 ease-out border-r-2 border-[#1A1A1A]" 
+                        style={{ width: `${progressPercentage}%` }}
+                      ></div>
+                    </div>
+                    <div className="text-right mt-2 text-xs font-black uppercase tracking-widest text-[#065F46]">{progressPercentage}% Funded</div>
+                  </div>
+
+                  <a 
+                    href={campaign.link}
+                    className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#065F46] text-[#FDFBF7] font-bold uppercase tracking-widest py-4 px-6 transition-colors"
+                  >
+                    Direct Milaap Link <ExternalLink className="h-4 w-4" />
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {}
+      <div id="ledger" className="py-24 bg-[#FDFBF7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 pb-4 border-b-4 border-[#1A1A1A]">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#065F46] mb-2 flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4" /> 100% Audit Cleared
+              </p>
+              <h2 className="text-4xl font-black text-[#1A1A1A] uppercase tracking-tighter">The Ledger</h2>
+            </div>
+            <p className="text-sm font-bold uppercase tracking-widest text-[#1A1A1A]/60 max-w-xs text-right mt-4 md:mt-0 font-mono">
+              PERMANENT_RECORD_V1.0
+            </p>
+          </div>
+
+          <div className="bg-white border-2 border-[#1A1A1A] overflow-hidden shadow-[8px_8px_0px_rgba(26,26,26,1)]">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse font-mono">
+                <thead>
+                  <tr className="bg-[#1A1A1A] text-[#FDFBF7] text-xs font-bold uppercase tracking-widest">
+                    <th className="py-4 px-6 whitespace-nowrap border-r-2 border-[#FDFBF7]/20">TRX ID</th>
+                    <th className="py-4 px-6 whitespace-nowrap border-r-2 border-[#FDFBF7]/20">Date</th>
+                    <th className="py-4 px-6 whitespace-nowrap border-r-2 border-[#FDFBF7]/20">Recipient Institution</th>
+                    <th className="py-4 px-6 whitespace-nowrap border-r-2 border-[#FDFBF7]/20">Amount</th>
+                    <th className="py-4 px-6 whitespace-nowrap">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm">
+                  {ledgerEntries.map((entry, index) => (
+                    <tr key={entry.id} className={`hover:bg-[#FDFBF7] transition-colors ${index !== ledgerEntries.length - 1 ? 'border-b-2 border-[#1A1A1A]' : ''}`}>
+                      <td className="py-4 px-6 font-bold border-r-2 border-[#1A1A1A] whitespace-nowrap">{entry.id}</td>
+                      <td className="py-4 px-6 border-r-2 border-[#1A1A1A] whitespace-nowrap">{entry.date}</td>
+                      <td className="py-4 px-6 font-bold font-sans uppercase border-r-2 border-[#1A1A1A] whitespace-nowrap">{entry.recipient}</td>
+                      <td className="py-4 px-6 font-black text-[#065F46] border-r-2 border-[#1A1A1A] whitespace-nowrap">{entry.amount}</td>
+                      <td className="py-4 px-6 font-bold uppercase text-xs whitespace-nowrap flex items-center gap-2">
+                         <span className="w-2 h-2 rounded-full bg-[#065F46]"></span> {entry.status}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {}
+      <div id="initiative" className="py-32 bg-[#1A1A1A] text-[#FDFBF7] border-t-4 border-[#1A1A1A] relative overflow-hidden">
+        {/* Abstract structural grid background */}
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(#FDFBF7 1px, transparent 1px), linear-gradient(90deg, #FDFBF7 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="w-20 h-20 bg-[#FDFBF7] rounded-none flex items-center justify-center mx-auto mb-8 shadow-[8px_8px_0px_rgba(6,95,70,1)]">
+            <UserCheck className="h-10 w-10 text-[#1A1A1A]" />
+          </div>
+          <h2 className="text-4xl font-black mb-3 tracking-tight uppercase">The Initiative</h2>
+          <p className="text-[#065F46] font-bold tracking-widest uppercase text-sm mb-12">A Medical Student Collective • Clinical Transparency</p>
+          
+          <div className="relative mb-12 max-w-3xl mx-auto bg-[#FDFBF7] p-8 border-l-4 border-[#065F46]">
+            <Quote className="absolute top-4 left-4 h-8 w-8 text-[#1A1A1A]/20" />
+            <p className="text-[#1A1A1A] leading-relaxed text-lg md:text-xl font-serif relative z-10 pl-8 text-left">
+              "We built Al-Mizan to solve a critical problem witnessed in the wards: patients abandoning care purely because of financial bottlenecks. By combining clinical verification with a transparent digital ledger, we allow donors and alumni to fund care with 100% confidence that their money goes straight to the hospital billing desk."
+            </p>
+          </div>
+          
+          <div className="inline-flex items-center justify-center gap-2 border-2 border-[#FDFBF7] bg-transparent px-6 py-3 text-sm font-bold uppercase tracking-widest">
+            A Verified Medical Student Initiative
+          </div>
+        </div>
+      </div>
+
+      <footer className="bg-[#1A1A1A] py-12 text-center text-[#FDFBF7]/60 text-sm font-medium border-t border-[#FDFBF7]/20 font-mono">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-center gap-2 mb-4 opacity-50">
+            <Activity className="h-5 w-5" />
+            <span className="font-bold text-base tracking-tight font-sans uppercase">One Life: Al-Mizan</span>
+          </div>
+          <p className="uppercase tracking-widest text-xs font-bold">An independent, non-profit digital collective.</p>
+          <p className="mt-8 text-xs">© 2026 • A Student-Led Initiative</p>
+        </div>
+      </footer>
+      
+      {/* Required styles */}
+      <style dangerouslySetInnerHTML={{__html: `
+        .animate-fade-in-up {
+          animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-up-fade {
+          animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-slide-up-fade-delay {
+          animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+          opacity: 0;
+        }
+        @keyframes slideUpFade {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}} />
+    </div>
+  );
+}
