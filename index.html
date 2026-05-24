@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Activity, ShieldCheck, ExternalLink, FileText, UserCheck, CheckCircle2, ChevronRight, Scale, Quote, Plus, Minus } from 'lucide-react';
+import { Activity, ShieldCheck, ExternalLink, UserCheck, CheckCircle2, ChevronRight, Quote, Plus, Minus } from 'lucide-react';
 
 const activeCampaigns = [
   {
@@ -51,7 +51,7 @@ export default function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsEnglish((prev) => !prev);
-    }, 4000); // Slower, more deliberate rotation
+    }, 4000); 
     return () => clearInterval(interval);
   }, []);
 
@@ -75,7 +75,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#FDFBF7] font-sans text-[#1A1A1A] selection:bg-[#065F46] selection:text-white">
       
-      {}
       {splashState !== 'done' && (
         <div className={`fixed inset-0 z-[100] bg-[#FDFBF7] flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out ${splashState === 'leaving' ? 'opacity-0' : 'opacity-100'}`}>
           <div className="overflow-hidden flex items-center gap-3">
@@ -94,12 +93,10 @@ export default function App() {
         </div>
       )}
 
-      {}
       <nav className="bg-[#FDFBF7] border-b-2 border-[#1A1A1A] sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
             
-            {/* Auto-Rotating Brand Logo */}
             <div className="flex items-center gap-3 select-none group">
               <div className="bg-[#1A1A1A] p-2 rounded-none border-2 border-[#1A1A1A] transition-all duration-300">
                 <Activity className="h-6 w-6 text-[#FDFBF7]" />
@@ -134,7 +131,6 @@ export default function App() {
         </div>
       </nav>
 
-      {}
       <div className="relative pt-24 pb-20 lg:pt-32 lg:pb-24 border-b-2 border-[#1A1A1A] bg-[url('https://www.transparenttextures.com/patterns/clean-paper.png')]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -162,7 +158,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Stark Stats Panel */}
             <div className="lg:col-span-4 flex flex-col gap-4">
               <div className="border-2 border-[#1A1A1A] p-6 bg-white">
                 <p className="text-xs uppercase tracking-widest font-bold text-[#1A1A1A]/60 mb-1 border-b-2 border-[#1A1A1A] pb-2">Verified Cases</p>
@@ -182,7 +177,6 @@ export default function App() {
         </div>
       </div>
 
-      {}
       <div className="py-12 border-b-2 border-[#1A1A1A] bg-[#FDFBF7]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8 border-b-4 border-[#1A1A1A] pb-2">
@@ -192,7 +186,6 @@ export default function App() {
 
           <div className="border-2 border-[#1A1A1A] divide-y-2 divide-[#1A1A1A] bg-white">
             
-            {/* One Life Dropdown */}
             <div>
               <button 
                 onClick={() => togglePhilosophy('one-life')}
@@ -217,7 +210,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Al-Mizan Dropdown */}
             <div>
               <button 
                 onClick={() => togglePhilosophy('al-mizan')}
@@ -255,7 +247,6 @@ export default function App() {
         </div>
       </div>
 
-      {}
       <div id="campaigns" className="py-24 border-b-2 border-[#1A1A1A] bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-[#FDFBF7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -296,7 +287,6 @@ export default function App() {
                   
                   <p className="text-[#1A1A1A] mb-8 flex-grow leading-relaxed font-serif text-lg">{campaign.description}</p>
                   
-                  {/* Neobrutalist Progress Bar */}
                   <div className="mb-8 border-2 border-[#1A1A1A] p-4 bg-[#FDFBF7]">
                     <div className="flex justify-between font-mono text-sm font-bold mb-2 uppercase">
                       <span>Raised: ₹{campaign.raised.toLocaleString()}</span>
@@ -324,7 +314,6 @@ export default function App() {
         </div>
       </div>
 
-      {}
       <div id="ledger" className="py-24 bg-[#FDFBF7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 pb-4 border-b-4 border-[#1A1A1A]">
@@ -370,9 +359,7 @@ export default function App() {
         </div>
       </div>
 
-      {}
       <div id="initiative" className="py-32 bg-[#1A1A1A] text-[#FDFBF7] border-t-4 border-[#1A1A1A] relative overflow-hidden">
-        {/* Abstract structural grid background */}
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(#FDFBF7 1px, transparent 1px), linear-gradient(90deg, #FDFBF7 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
         
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -406,8 +393,7 @@ export default function App() {
         </div>
       </footer>
       
-      {/* Required styles */}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style>{`
         .animate-fade-in-up {
           animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -426,7 +412,7 @@ export default function App() {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
-      `}} />
+      `}</style>
     </div>
   );
 }
